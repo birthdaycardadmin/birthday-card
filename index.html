@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Romantic Birthday Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: url('https://i.pinimg.com/736x/a1/9c/cd/a19ccd8797f181fd1e61fdfaaff2d781.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .countdown-box {
+      margin-top: 100px;
+      border: 4px solid hotpink;
+      display: inline-block;
+      padding: 20px 40px;
+      border-radius: 20px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: hotpink;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .intro-message {
+      display: none;
+      font-size: 2rem;
+      color: hotpink;
+      font-family: 'Pacifico', cursive;
+      background: rgba(255, 255, 255, 0.75);
+      padding: 20px 30px;
+      border-radius: 20px;
+      width: fit-content;
+      margin: 30px auto;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .emoji {
+      position: absolute;
+      animation: floatUp 3s ease-in-out infinite;
+      font-size: 2rem;
+      z-index: 10;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+
+    .box {
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px solid hotpink;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 500px;
+      margin: 100px auto;
+      display: none;
+    }
+
+    .box.active {
+      display: block;
+      animation: fadeIn 0.6s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .question {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .btns button {
+      background: hotpink;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      margin: 0 10px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btns button:hover {
+      background: deeppink;
+    }
+
+    #qChuzaii2 .question {
+      font-size: 1.3rem;
+      background: rgba(255, 255, 255, 0.8);
+      color: hotpink;
+      padding: 20px;
+      border-radius: 20px;
+      animation: fadeIn 0.6s ease-in;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="countdown-box" id="countdown">3</div>
+  <div class="intro-message" id="introMessage">
+    🎂🥳💋😘 Happy Birthday meri jaan 💋😘🥳🎂
+  </div>
+
+  <div class="box" id="q1">
+    <div class="question">🌹 Do you love me?</div>
+    <div class="btns">
+      <button onclick="next('q1', 'q2')">Yes</button>
+      <button onclick="next('q1', 'q2')">No</button>
+    </div>
+  </div>
+
+  <div class="box" id="q2">
+    <div class="question">💖 How much do you love me?</div>
+    <div class="btns">
+      <button onclick="next('q2', 'q3')">50%</button>
+      <button onclick="next('q2', 'q3')">100%</button>
+    </div>
+  </div>
+
+  <div class="box" id="q3">
+    <div class="question">💍 Kya tum meri wife bano gi?</div>
+    <div class="btns">
+      <button onclick="next('q3', 'q4')">Yes</button>
+      <button onclick="next('q3', 'q4')">No</button>
+    </div>
+  </div>
+
+  <div class="box" id="q4">
+    <div class="question">
+      💋 happybirthday meri jan ko hamisha kush raho aysy hastii rho lambi umar ho apki zindgii mea apko dherr sarii kushiyaa mely kabi museebat na ay ap pee or khush o abad rahyy mera piyar  👀🫂💕
+    </div>
+    <div class="btns">
+      <button onclick="next('q4', 'q5')">Thank you</button>
+      <button onclick="next('q4', 'q5')">Hmmm</button>
+    </div>
+  </div>
+
+  <div class="box" id="q5">
+    <div class="question">
+      💌 Begum ji... agar aapko mujhse shadi karni hai 💍
+      toh kuch karna padega 😏 warna vibes chali jaayengi 😔
+    </div>
+    <div class="btns">
+      <button onclick="next('q5', 'q6')">👰‍♀️ GG jaan, main aapse hi shadi karoongi</button>
+      <button onclick="next('q5', 'q6')">🤔 Achha... dekhte hain hmm</button>
+    </div>
+  </div>
+
+  <div class="box" id="q6">
+    <div class="question">
+      🎉 Begum ji... ghar pe jaldi se apny ghar per baat kar rean 😌<br>
+      Par agle saal InshaAllah birthday hum <strong>saath</strong> manayenge 🥰<br>
+      <div id="timerCount">⏳ 30s</div>
+    </div>
+    <div class="btns">
+      <button id="doneBtn" onclick="next('q6', 'q7')" style="display:none">✅ Done</button>
+    </div>
+  </div>
+
+  <div class="box" id="q7">
+    <div class="question">
+      🎈 yr birthday to ho gyaa cake b kat gyaa hahaha ab agy chly hahaha note notee kar ny 💋🫦🙈
+      <div id="timerCountQ7">⏳ 30s</div>
+    </div>
+    <div class="btns">
+      <button id="doneBtnQ7" onclick="next('q7', 'qChuzaii'); startChuzaiiTimer();" style="display:none">✅ chloo jan 🙈🤭Done</button>
+    </div>
+  </div>
+
+  <div class="box" id="qChuzaii">
+    <div class="question">
+      🐣🐥🙈🫦 Chuzaiii aj tashadud ho jay ap pe 😅
+      <div id="timerCountChuzaii">⏳ 10s</div>
+    </div>
+    <div class="btns">
+      <button onclick="next('qChuzaii', 'q8')">G Chuzzy kar lein</button>
+      <button onclick="next('qChuzaii', 'bye')">Nahi</button>
+    </div>
+  </div>
+
+  <div class="box" id="q8">
+    <div class="question">
+      😘 Kiss ya Bite Kiss? 😍
+    </div>
+    <div class="btns">
+      <button onclick="next('q8', 'qChuzaii2')">Kiss</button>
+      <button onclick="next('q8', 'qChuzaii2')">Bite Kiss</button>
+    </div>
+  </div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Romantic Birthday Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: url('https://i.pinimg.com/736x/a1/9c/cd/a19ccd8797f181fd1e61fdfaaff2d781.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .countdown-box {
+      margin-top: 100px;
+      border: 4px solid hotpink;
+      display: inline-block;
+      padding: 20px 40px;
+      border-radius: 20px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: hotpink;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .intro-message {
+      display: none;
+      font-size: 2rem;
+      color: hotpink;
+      font-family: 'Pacifico', cursive;
+      background: rgba(255, 255, 255, 0.75);
+      padding: 20px 30px;
+      border-radius: 20px;
+      width: fit-content;
+      margin: 30px auto;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .emoji {
+      position: absolute;
+      animation: floatUp 3s ease-in-out infinite;
+      font-size: 2rem;
+      z-index: 10;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+
+    .box {
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px solid hotpink;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 500px;
+      margin: 100px auto;
+      display: none;
+    }
+
+    .box.active {
+      display: block;
+      animation: fadeIn 0.6s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .question {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .btns button {
+      background: hotpink;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      margin: 0 10px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btns button:hover {
+      background: deeppink;
+    }
+
+    #qChuzaii2 .question {
+      font-size: 1.3rem;
+      background: rgba(255, 255, 255, 0.8);
+      color: hotpink;
+      padding: 20px;
+      border-radius: 20px;
+      animation: fadeIn 0.6s ease-in;
+    }
+
+    /* 🛏️ Bed shake effect */
+    @keyframes shake {
+      0% { transform: translate(2px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(0px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(2px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(2px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+
+    .shake {
+      animation: shake 0.5s infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- [Your original HTML content here remains unchanged] -->
+
+  <!-- Inside qChuzaii2: only buttons are updated -->
+  <div class="box" id="qChuzaii2">
+    <div class="question">
+      💋 Thumyy peachy sy pakarna, sath lagana, gardan sy baal hatana,<br>
+      josha sy thumy chumnaa... tumhara har ek til, har ek hissa per pyaar karna 😘<br>
+      aur phir bed pe bey kaabu ho jana tum par tumaray dono hatoo ko apny haho sy jazb kar lena tumaray labho ko bee dardi sy chumnoo itna k thumy sans lyny mea mushkil ho jay uff ye dard or feelning jaan 🥵🙈💋
+    </div>
+    <div class="btns">
+      <button onclick="playKissEffect(); next('qChuzaii2', 'videoBox')">Ahhhh! 💋🥵</button>
+      <button onclick="playKissEffect(); next('qChuzaii2', 'bye')">hyyy 🙈🙊</button>
+    </div>
+  </div>
+
+  <!-- Rest remains unchanged -->
+  <div class="box" id="videoBox">
+    <div class="question">
+      🎥 Enjoy the surprise video! 💕<br>
+      <video src="#" controls autoplay style="max-width:100%; border: 3px solid hotpink; border-radius: 20px;"></video>
+    </div>
+  </div>
+
+  <div class="box" id="bye">
+    <div class="question">🙃 Okay bye then... mood off 😔</div>
+    <div class="btns">
+      <button onclick="next('bye', 'qChuzaii')">🔙 Go Back</button>
+    </div>
+  </div>
+
+  <div class="box" id="end">
+    <div class="question">🎂 Ummmaaaa! Thank you meri jaan 😘</div>
+  </div>
+
+  <audio id="kissSound" src="https://www.fesliyanstudios.com/play-mp3/6966" preload="auto"></audio>
+
+  <script>
+    let timeLeft = 3;
+    const countdownEl = document.getElementById('countdown');
+    const intro = document.getElementById('introMessage');
+
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdownEl.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        countdownEl.style.display = 'none';
+        intro.style.display = 'block';
+        showEmojis();
+        setTimeout(() => document.getElementById('q1').classList.add('active'), 3000);
+      }
+    }, 1000);
+
+    function next(currentId, nextId) {
+      document.getElementById(currentId).classList.remove('active');
+      document.getElementById(nextId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showEmojis() {
+      const emojis = ['🎂','🥳','💋','😘'];
+      for (let i = 0; i < 20; i++) {
+        let e = document.createElement('div');
+        e.className = 'emoji';
+        e.style.left = Math.random() * 100 + 'vw'; 
+        e.style.animationDelay = (Math.random() * 3) + 's';
+        e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        document.body.appendChild(e);
+        setTimeout(() => e.remove(), 5000);
+      }
+    }
+
+    function startQ6Timer() {
+      let readTime = 30;
+      const timerDisplay = document.getElementById('timerCount');
+      const doneBtn = document.getElementById('doneBtn');
+      const countdown = setInterval(() => {
+        timerDisplay.textContent = `⏳ ${readTime}s`;
+        readTime--;
+        if (readTime < 0) {
+          clearInterval(countdown);
+          timerDisplay.textContent = "✅ Ready";
+          doneBtn.style.display = 'inline-block';
+        }
+      }, 1000);
+    }
+
+    const q6Check = setInterval(() => {
+      const q6 = document.getElementById('q6');
+      if (q6 && q6.classList.contains('active')) {
+        startQ6Timer();
+        clearInterval(q6Check);
+      }
+    }, 500);
+
+    function startQ7Timer() {
+      let readTime = 30;
+      const timerDisplay = document.getElementById('timerCountQ7');
+      const doneBtn = document.getElementById('doneBtnQ7');
+      const countdown = setInterval(() => {
+        timerDisplay.textContent = `⏳ ${readTime}s`;
+        readTime--;
+        if (readTime < 0) {
+          clearInterval(countdown);
+          timerDisplay.textContent = "✅ Ready";
+          doneBtn.style.display = 'inline-block';
+        }
+      }, 1000);
+    }
+
+    const q7Check = setInterval(() => {
+      const q7 = document.getElementById('q7');
+      if (q7 && q7.classList.contains('active')) {
+        startQ7Timer();
+        clearInterval(q7Check);
+      }
+    }, 500);
+
+    function startChuzaiiTimer() {
+      let readTime = 10;
+      const timerDisplay = document.getElementById('timerCountChuzaii');
+      const countdown = setInterval(() => {
+        timerDisplay.textContent = `⏳ ${readTime}s`;
+        readTime--;
+        if (readTime < 0) {
+          clearInterval(countdown);
+        }
+      }, 1000);
+    }
+
+    // 🔊📳🛏️ Special kiss sound + vibration + shake effect
+    function playKissEffect() {
+      const sound = document.getElementById("kissSound");
+      if (sound) sound.play();
+
+      // Vibration for mobile
+      if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+
+      // Add shake effect to body
+      document.body.classList.add('shake');
+      setTimeout(() => {
+        document.body.classList.remove('shake');
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
